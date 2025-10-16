@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:controller="com.crms.controller.SearchRecordsController"
+            prefHeight="700.0" prefWidth="1000.0"
+            xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+
+    <top>
+        <VBox spacing="15.0" style="-fx-padding: 20;">
+            <Label text="Search &amp; Filter Crime Records" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <TextField fx:id="generalSearchField" promptText="Enter Case ID, Suspect Name, or Keyword" prefWidth="400.0"/>
+                <Button text="Search" onAction="#handleSearch" style="-fx-background-color: #007bff; -fx-text-fill: white;"/>
+            </HBox>
+
+            <HBox spacing="15.0" alignment="CENTER_LEFT">
+                <Label text="Filters:"/>
+                <ComboBox fx:id="typeFilter" promptText="Crime Type" />
+                <ComboBox fx:id="statusFilter" promptText="Case Status" />
+                <DatePicker fx:id="dateFromPicker" promptText="From Date" />
+                <Label text="to"/>
+                <DatePicker fx:id="dateToPicker" promptText="To Date" />
+                <Button text="Reset Filters" onAction="#handleResetFilters" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="10.0" style="-fx-padding: 0 20 20 20;">
+            <Label fx:id="resultsCountLabel" text="Displaying 0 results." style="-fx-font-weight: bold;"/>
+            
+            <TableView fx:id="recordsTableView" VBox.vgrow="ALWAYS">
+                </TableView>
+
+            <HBox spacing="10.0" alignment="BOTTOM_RIGHT">
+                <Button text="View/Edit Selected" onAction="#handleViewEditRecord" style="-fx-padding: 8 15;"/>
+                <Button text="Export to CSV" onAction="#handleExport" style="-fx-padding: 8 15;"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

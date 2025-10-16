@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+
+<VBox fx:controller="com.crms.controller.ReportsAuditController"
+      prefHeight="700.0" prefWidth="1000.0" spacing="15.0" style="-fx-padding: 20;"
+      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+
+    <Label text="System Reports &amp; Audit Logs" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        
+        <Tab text="Summary Reports">
+            <VBox spacing="20.0" style="-fx-padding: 25;">
+                
+                <Label text="Report Generation Parameters" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                
+                <HBox spacing="15.0" alignment="CENTER_LEFT">
+                    <Label text="Report Type:"/>
+                    <ComboBox fx:id="reportTypeComboBox" promptText="Select Report (e.g., Cases by Type, Closed Cases)" prefWidth="250.0"/>
+                    
+                    <Label text="Date Range:"/>
+                    <DatePicker fx:id="dateFromPicker" promptText="From" />
+                    <Label text="to"/>
+                    <DatePicker fx:id="dateToPicker" promptText="To" />
+                    
+                    <Button text="Generate Report" onAction="#handleGenerateReport" style="-fx-background-color: #007bff; -fx-text-fill: white;"/>
+                </HBox>
+                
+                <Label fx:id="reportTitleLabel" text="Generated Report Results" style="-fx-font-weight: bold;"/>
+                <TableView fx:id="reportResultsTable" VBox.vgrow="ALWAYS" prefHeight="400.0">
+                    </TableView>
+                
+                <Button text="Export Report" onAction="#handleExportReport" alignment="BOTTOM_RIGHT"/>
+            </VBox>
+        </Tab>
+
+        <Tab text="Audit Logs">
+            <VBox spacing="10.0" style="-fx-padding: 25;">
+                <Label text="System Activity and User Actions" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <Label text="Filter By User ID:"/>
+                    <TextField fx:id="auditUserFilterField" promptText="Enter User ID" />
+                    <Button text="Filter" onAction="#handleFilterAuditLog"/>
+                </HBox>
+                
+                <TableView fx:id="auditLogTable" VBox.vgrow="ALWAYS" prefHeight="500.0">
+                    </TableView>
+            </VBox>
+        </Tab>
+    </TabPane>
+</VBox>

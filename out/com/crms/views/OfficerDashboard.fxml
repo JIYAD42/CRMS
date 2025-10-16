@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:controller="com.crms.controller.OfficerDashboardController"
+            prefHeight="600.0" prefWidth="800.0"
+            xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+
+    <left>
+        <VBox spacing="15.0" style="-fx-padding: 20; -fx-border-color: #ccc; -fx-border-width: 0 1 0 0;" prefWidth="180.0">
+            <Label text="Officer Menu" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+            <Button text="File New Report" onAction="#goToCrimeReporting" maxWidth="Infinity" />
+            <Button text="My Cases" onAction="#goToCaseManagement" maxWidth="Infinity" />
+            <Button text="Search Records" onAction="#goToSearchRecords" maxWidth="Infinity" />
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="20.0" style="-fx-padding: 25;">
+            <Label text="Officer Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+            <HBox spacing="20.0" alignment="CENTER_LEFT">
+                <VBox style="-fx-border-color: #007bff; -fx-border-radius: 5; -fx-padding: 10;" prefWidth="200.0">
+                    <Label text="Assigned Cases" style="-fx-font-weight: bold;" />
+                    <Label fx:id="assignedCasesCount" text="15" style="-fx-font-size: 24px; -fx-text-fill: #007bff;" />
+                </VBox>
+                <VBox style="-fx-border-color: #28a745; -fx-border-radius: 5; -fx-padding: 10;" prefWidth="200.0">
+                    <Label text="Open Reports" style="-fx-font-weight: bold;" />
+                    <Label fx:id="openReportsCount" text="04" style="-fx-font-size: 24px; -fx-text-fill: #28a745;" />
+                </VBox>
+            </HBox>
+
+            <Label text="My Active Cases" style="-fx-font-weight: bold;"/>
+            <TableView fx:id="activeCasesTable" prefHeight="300.0">
+                </TableView>
+
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.crms.controller.CrimeReportingController"
+            fitToWidth="true" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/21">
+    
+    <VBox alignment="TOP_CENTER" spacing="25.0" style="-fx-padding: 30;">
+        <Label text="File New Crime Report" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+        <GridPane hgap="20.0" vgap="15.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+            </columnConstraints>
+            
+            <Label text="Incident Details" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            
+            <Label text="Crime Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <ComboBox fx:id="crimeTypeComboBox" promptText="Select Type" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            
+            <Label text="Date of Incident:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <DatePicker fx:id="datePicker" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            
+            <Label text="Time of Incident:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <TextField fx:id="timeField" promptText="e.g., 14:30 (24-hour format)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            
+            <Label text="Location/Address:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <TextField fx:id="locationField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            
+            <Label text="Incident Description:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+            <TextArea fx:id="descriptionArea" prefRowCount="4" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            
+            <Label text="Reporter Information" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="7">
+                <GridPane.margin>
+                    <Insets top="15.0" />
+                </GridPane.margin>
+            </Label>
+            
+            <Label text="Reporter Name:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+            <TextField fx:id="reporterNameField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            
+            <Label text="Contact Number:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+            <TextField fx:id="reporterContactField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            
+            <Label text="Link to Existing Case (Optional):" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="11">
+                <GridPane.margin>
+                    <Insets top="15.0" />
+                </GridPane.margin>
+            </Label>
+            
+            <Label text="Case ID:" GridPane.columnIndex="0" GridPane.rowIndex="12" />
+            <TextField fx:id="linkedCaseIDField" promptText="Enter Case ID or leave blank for new case" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+            
+        </GridPane>
+        
+        <Button text="Register and Validate Report" onAction="#handleReportSubmission" style="-fx-font-size: 16px; -fx-padding: 10 20; -fx-background-color: #28a745; -fx-text-fill: white;" />
+        
+        <Label fx:id="statusMessage" text="" style="-fx-text-fill: green; -fx-font-weight: bold;"/>
+        
+    </VBox>
+</ScrollPane>

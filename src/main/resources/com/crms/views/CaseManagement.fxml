@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:controller="com.crms.controller.CaseManagementController"
+            prefHeight="700.0" prefWidth="1000.0"
+            xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+
+    <!--  Top Section: Case List -->
+    <top>
+        <VBox spacing="10.0" style="-fx-padding: 15; -fx-background-color: #f7f7f7;">
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Label text="Case Management" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+                <Pane HBox.hgrow="ALWAYS" /> <!-- Fills space to push button to the right -->
+                <Button text="Back to Dashboard" onAction="#handleBack" style="-fx-padding: 5 15;" />
+            </HBox>
+
+            <Label text="Available Cases:" style="-fx-font-size: 16px;" />
+
+            <TableView fx:id="casesTable" prefHeight="200.0">
+                <columns>
+                    <TableColumn fx:id="caseIdColumn" text="Case ID" prefWidth="100.0" />
+                    <TableColumn fx:id="caseTitleColumn" text="Title" prefWidth="300.0" />
+                    <TableColumn fx:id="caseStatusColumn" text="Status" prefWidth="150.0" />
+                </columns>
+            </TableView>
+
+            <Label text="Select a case to view or edit details below." style="-fx-font-style: italic;" />
+        </VBox>
+    </top>
+
+    <!-- 🔹 Center Section: Case Details and Suspects -->
+    <center>
+        <TabPane fx:id="caseTabPane" prefHeight="400.0" tabClosingPolicy="UNAVAILABLE">
+            
+            <!--  Case Details Tab -->
+            <Tab text="Details &amp; Status">
+                <VBox spacing="20.0" style="-fx-padding: 25;">
+                    <GridPane hgap="15.0" vgap="15.0">
+
+                        <Label text="Case ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <Label fx:id="caseIdLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-font-weight: bold;" />
+
+                        <Label text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <TextField fx:id="caseTitleField" promptText="Case Title" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="statusComboBox" promptText="Select Status" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                        <Label text="Assigned Officer:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="officerComboBox" promptText="Assign Officer" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                        <Label text="Report Details:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                        <TextArea fx:id="reportDetailsArea" promptText="Summary of linked crime reports..." 
+                                  prefRowCount="4" wrapText="true" prefWidth="400.0" 
+                                  GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                        <Label text="Log / Notes:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                        <TextArea fx:id="logNotesArea" promptText="Enter investigation notes and actions taken..." 
+                                  prefRowCount="4" wrapText="true" prefWidth="400.0" 
+                                  GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    </GridPane>
+                    
+                    <HBox spacing="15.0" alignment="CENTER_LEFT">
+                        <Button text="Update Case Status" onAction="#handleUpdateStatus" 
+                                style="-fx-padding: 8 15; -fx-background-color: #007bff; -fx-text-fill: white;" />
+                        <Button text="Close Case" onAction="#handleCloseCase" 
+                                style="-fx-padding: 8 15; -fx-background-color: #dc3545; -fx-text-fill: white;" />
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <!--  Suspects Tab -->
+            <Tab text="Suspects">
+                <VBox spacing="10.0" style="-fx-padding: 25;">
+                    <ToolBar>
+                        <Label text="Suspects Linked to Case:"/>
+                        <Button text="Add New Suspect" onAction="#handleAddSuspect"/>
+                    </ToolBar>
+
+                    <TableView fx:id="suspectsTable" prefHeight="300.0" />
+
+                    <Button text="View Suspect Details / History" onAction="#handleViewSuspectDetails" />
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>
