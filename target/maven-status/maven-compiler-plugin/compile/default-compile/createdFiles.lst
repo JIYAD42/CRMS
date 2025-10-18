@@ -6,7 +6,6 @@ com\crms\controller\ReportsAuditController.class
 com\crms\Main.class
 com\crms\controller\CaseManagementController.class
 com\crms\controller\UserManagementController$UserRow.class
-com\crms\controller\ReportsAuditController$CrimeCaseRow.class
 com\crms\model\Admin.class
 com\crms\controller\LoginController.class
 com\crms\database\AddOfficerColumn.class

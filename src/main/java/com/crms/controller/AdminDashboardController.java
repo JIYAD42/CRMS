@@ -145,6 +145,27 @@ public class AdminDashboardController implements Initializable {
     /* ------------------------
        Navigation Actions
        ------------------------ */
+    
+    @FXML
+public void handlelogout(ActionEvent event) {
+    if (currentAdmin != null) {
+        currentAdmin.logout();
+    }
+
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/crms/views/login.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Login - CRMS");
+        stage.show();
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
 
     @FXML
     public void goToUserManagement(ActionEvent event) {
@@ -153,15 +174,15 @@ public class AdminDashboardController implements Initializable {
     }
 
     @FXML
-    public void goToReportsAudit(ActionEvent event) {
-        insertAuditLog("Navigated to Reports & Audit");
-        switchScene(event, "/com/crms/views/ReportsAudit.fxml", "Reports & Audit - CRMS");
+    public void goToCaseManagement(ActionEvent event) {
+        insertAuditLog("Navigated to Case Management");
+        switchScene(event, "/com/crms/views/adminCaseManagement.fxml", "Case Management - CRMS");
     }
 
     @FXML
-    public void generateReport(ActionEvent event) {
-        insertAuditLog("Generated Summary Report");
-        System.out.println("Generating Summary Report...");
+    public void goToReportsAudit(ActionEvent event) {
+        insertAuditLog("Navigated to Reports & Audit");
+        switchScene(event, "/com/crms/views/ReportsAudit.fxml", "Reports & Audit - CRMS");
     }
 
     /* ------------------------

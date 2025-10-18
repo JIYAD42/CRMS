@@ -100,6 +100,26 @@ public class OfficerDashboardController {
             e.printStackTrace();
         }
     }
+    @FXML
+public void handlelogout(ActionEvent event) {
+    if (currentOfficer != null) {
+        currentOfficer.logout();
+    }
+
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/crms/views/login.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Login - CRMS");
+        stage.show();
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
 
    @FXML
 public void goToCrimeReporting(ActionEvent event) {

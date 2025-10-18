@@ -5,24 +5,40 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:controller="com.crms.controller.LoginController"
-      alignment="CENTER" spacing="15.0" style="-fx-background-color: #f0f0f0;"
-      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+<StackPane fx:controller="com.crms.controller.LoginController"
+           stylesheets="@styles.css"
+           xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
 
-    <padding>
-        <Insets top="50.0" right="50.0" bottom="50.0" left="50.0" />
-    </padding>
+    <style>
+        -fx-background-color: #f7f9fb;
+    </style>
 
-    <Label text="CRMS Login" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+    <VBox alignment="CENTER" spacing="20.0" prefWidth="350.0"
+          styleClass="login-card"> <padding>
+            <Insets top="40.0" right="30.0" bottom="40.0" left="30.0" />
+        </padding>
 
-    <TextField fx:id="usernameField" promptText="User ID / Username" maxWidth="250.0" />
+        <Label text="CRMS" styleClass="header-text" />
+        <Label text="Crime Record Management System" styleClass="sub-header-text" />
 
-    <PasswordField fx:id="passwordField" promptText="Password" maxWidth="250.0" />
+        <VBox spacing="5.0">
+            <Label text="Username" styleClass="input-label" />
+            <TextField fx:id="usernameField" promptText="Enter your user ID" styleClass="modern-text-field" />
+        </VBox>
 
-    <Button text="Login" onAction="#handleLoginButton" maxWidth="250.0" style="-fx-font-size: 14px; -fx-padding: 8 25;" />
+        <VBox spacing="5.0">
+            <Label text="Password" styleClass="input-label" />
+            <PasswordField fx:id="passwordField" promptText="Enter your password" styleClass="modern-text-field" />
+        </VBox>
 
-    <Label fx:id="errorLabel" text="" style="-fx-text-fill: red; -fx-font-size: 12px; -fx-max-width: 250;" wrapText="true" />
+        <Label fx:id="errorLabel" text="" styleClass="error-label" wrapText="true" />
 
-</VBox>
+        <Button text="Login" onAction="#handleLoginButton"
+                maxWidth="Infinity" minHeight="40.0" styleClass="primary-button" />
+
+    </VBox>
+</StackPane>

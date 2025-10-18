@@ -1,6 +1,7 @@
 package com.crms.controller;
 
 import java.io.IOException;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,70 +37,93 @@ public class LoginController {
      * Authenticate user against the database.
      * Returns the role as stored in DB (e.g., "ADMIN", "OFFICER") or null if invalid.
      */
-    public static String authenticateUser(String userId, String passwordHash) {
-        String role = null;
+    public static String authenticateUser(String userId, String rawPassword) {
+    String role = null;
 
-        String sql = "SELECT role FROM users WHERE user_id = ? AND password_hash = ? AND is_active = TRUE";
+    // Hash the entered password before querying
+    System.out.println("Entered password : " + rawPassword);
+    String passwordHash = hashPassword(rawPassword);
+    System.out.println("Entered password hash: " + passwordHash);
 
-        try (Connection conn = DatabaseHelper.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, userId);
-            stmt.setString(2, passwordHash);
+    String sql = "SELECT role FROM users WHERE user_id = ? AND password_hash = ? AND is_active = 1";
 
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                role = rs.getString("role");
-                System.out.println("User role: " + role);
-            } else {
-                System.out.println("Invalid credentials or inactive user");
-            }
+    try (Connection conn = DatabaseHelper.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        stmt.setString(1, userId);
+        stmt.setString(2, passwordHash);
+
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            role = rs.getString("role");
+            System.out.println("User role: " + role);
+        } else {
+            System.out.println("Invalid credentials or inactive user");
         }
 
-        return role;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+
+    return role;
+}
+
 
     /**
      * Handle login button click.
      */
     public void handleLoginButton(ActionEvent event) {
-        String userId = usernameField.getText().trim();
-        String password = passwordField.getText().trim();
+    String userId = usernameField.getText().trim();
+    String password = passwordField.getText().trim();
 
-        // TODO: Replace with actual hashed password logic
-        String passwordHash = password; // placeholder
+    if (userId.isEmpty() || password.isEmpty()) {
+        showError("Please enter both username and password.");
+        return;
+    }
 
-        String role = authenticateUser(userId, passwordHash);
+    String role = authenticateUser(userId, password); // now hashes internally
 
-        if (role == null) {
-            showError("Invalid credentials or inactive user");
-            return;
+    if (role == null) {
+        showError("Invalid credentials or inactive user");
+        return;
+    }
+
+    String name = getUserNameFromDB(userId);
+
+    switch (role.toUpperCase()) {
+        case "ADMIN":
+            loggedInUser = new Admin(userId, name);
+            logLogin(userId, "Admin login");
+            loggedInUser.login();
+            openAdminDashboard(event, (Admin) loggedInUser);
+            break;
+
+        case "OFFICER":
+            loggedInUser = new Officer(userId, name);
+            logLogin(userId, "Officer login");
+            loggedInUser.login();
+            openOfficerDashboard(event, (Officer) loggedInUser);
+            break;
+
+        default:
+            showError("Unknown role: " + role);
+            break;
+    }
+}
+
+private static String hashPassword(String password) {
+        if (password == null || password.isBlank()) return "";
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hash) sb.append(String.format("%02x", b));
+            return sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        String name = getUserNameFromDB(userId);
-
-        switch (role.toUpperCase()) {
-            case "ADMIN":
-                loggedInUser = new Admin(userId, name);
-                logLogin(userId, "Admin login"); // <-- audit log
-                loggedInUser.login();
-                openAdminDashboard(event, (Admin) loggedInUser);
-                break;
-
-            case "OFFICER":
-                loggedInUser = new Officer(userId, name);
-                logLogin(userId, "Officer login"); // <-- audit log
-                loggedInUser.login();
-                openOfficerDashboard(event, (Officer) loggedInUser);
-                break;
-
-            default:
-                showError("Unknown role: " + role);
-                return;
-        }
+        return "";
     }
 
     /**

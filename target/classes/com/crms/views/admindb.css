@@ -1,0 +1,207 @@
+/* ===================================================================
+   Admin Dashboard Styling
+   Primary Blue: #007bff
+   Secondary/Action: #6c757d
+   Danger/Red: #dc3545
+   Warning/Yellow: #ffc107
+   Background Light: #f0f3f8
+   Sidebar Dark: #334e68
+   Text Dark: #334e68
+   =================================================================== */
+
+/* --- ROOT/General Styles --- */
+.root {
+    /* Defined inline in FXML: -fx-background-color: #f0f3f8; */
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+/* ==============================
+   1. SIDEBAR (LEFT) STYLES
+   ============================== */
+
+.sidebar {
+    -fx-background-color: #334e68; /* Dark professional blue/gray */
+    -fx-pref-width: 250px;
+}
+
+.sidebar-logo {
+    -fx-font-size: 24px;
+    -fx-font-weight: 800;
+    -fx-text-fill: white;
+    -fx-padding: 0 0 10px 0;
+}
+
+.menu-header {
+    -fx-font-size: 11px;
+    -fx-text-fill: #99aab5; /* Light muted gray */
+    -fx-font-weight: bold;
+    -fx-padding: 10px 0 5px 0;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e6e9ee; /* Off-white text */
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.nav-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+}
+
+/* Active Dashboard Button */
+.nav-button-active {
+    -fx-background-color: #007bff; /* Primary color background */
+    -fx-text-fill: white;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(0, 123, 255, 0.3), 10, 0, 0, 2); /* Subtle blue glow/shadow */
+}
+
+/* ==============================
+   2. MAIN CONTENT STYLES
+   ============================== */
+
+.main-content-area {
+    -fx-background-color: #f0f3f8; /* Matches the root background */
+}
+
+.page-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #334e68;
+}
+
+.section-header {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4c6883;
+    -fx-padding: 10px 0 5px 0;
+}
+
+.separator {
+    -fx-border-color: #e0e6ed;
+    -fx-border-width: 0 0 1px 0;
+}
+
+
+/* ==============================
+   3. METRIC CARDS STYLES
+   ============================== */
+
+.metric-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 15, 0.2, 0, 4); /* Soft shadow */
+    -fx-pref-width: 250px;
+    -fx-spacing: 5;
+}
+
+.metric-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #6c757d; /* Muted text */
+}
+
+.metric-value {
+    -fx-font-size: 38px;
+    -fx-font-weight: 800;
+}
+
+/* Card Specific Colors (Border Accent & Value Text) */
+.card-primary {
+    -fx-border-color: #007bff;
+    -fx-border-width: 0 0 4px 0; /* Blue accent line at the bottom */
+}
+.card-primary > .metric-value {
+    -fx-text-fill: #007bff; /* Primary Blue text */
+}
+
+.card-danger {
+    -fx-border-color: #dc3545;
+    -fx-border-width: 0 0 4px 0; /* Red accent line */
+}
+.card-danger > .metric-value {
+    -fx-text-fill: #dc3545; /* Danger Red text */
+}
+
+.card-warning {
+    -fx-border-color: #ffc107;
+    -fx-border-width: 0 0 4px 0; /* Yellow accent line */
+}
+.card-warning > .metric-value {
+    -fx-text-fill: #ffc107; /* Warning Yellow text */
+}
+
+/* ==============================
+   4. BUTTON STYLES (Content Area)
+   ============================== */
+
+/* Primary Button (Large Action) */
+.primary-button-small {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+    -fx-padding: 8 15;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
+}
+.primary-button-small:hover {
+    -fx-background-color: #0056b3;
+}
+
+/* Secondary/Muted Button (Logout, Less Critical Actions) */
+.secondary-button, .secondary-button-small {
+    -fx-background-color: #e9ecef;
+    -fx-text-fill: #495057;
+    -fx-background-radius: 6;
+    -fx-font-size: 13px;
+    -fx-padding: 8 15;
+    -fx-border-color: #ced4da;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
+    -fx-cursor: hand;
+}
+.secondary-button:hover, .secondary-button-small:hover {
+    -fx-background-color: #d8dde3;
+}
+
+/* ==============================
+   5. TABLEVIEW STYLES
+   ============================== */
+
+.data-table {
+    -fx-border-color: #ced4da;
+    -fx-border-width: 1;
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-padding: 0;
+}
+
+.data-table .column-header-background {
+    -fx-background-color: #e9ecef; /* Light gray header background */
+    -fx-border-color: #ced4da;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.data-table .column-header {
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-text-fill: #495057;
+}
+
+.data-table .table-row-cell:odd {
+    -fx-background-color: #f7f9fb; /* Subtle zebra striping */
+}
+
+.data-table .table-row-cell:selected {
+    -fx-background-color: #b8daff; /* Light blue selection */
+}

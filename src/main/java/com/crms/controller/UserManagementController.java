@@ -135,41 +135,53 @@ public class UserManagementController {
         if (name.isBlank() || role == null || role.isBlank()) return;
 
         try (Connection conn = DatabaseHelper.getConnection()) {
-            if (id == null || id.isBlank()) {
-                // Insert new user
-                String sql = "INSERT INTO users (user_id, name, role, password_hash) VALUES (?, ?, ?, ?)";
-                try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    String newID = "user" + System.currentTimeMillis(); // simple unique ID
-                    ps.setString(1, newID);
-                    ps.setString(2, name);
-                    ps.setString(3, role);
-                    ps.setString(4, hashPassword(password));
-                    ps.executeUpdate();
-                    writeAuditLog("Added new user: " + newID);
-                }
-            } else {
-                // Update existing user
-                String sql = "UPDATE users SET name = ?, role = ?"
-                        + (password != null && !password.isBlank() ? ", password_hash = ?" : "")
-                        + " WHERE user_id = ?";
-                try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setString(1, name);
-                    ps.setString(2, role);
-                    int index = 3;
-                    if (password != null && !password.isBlank()) {
-                        ps.setString(index++, hashPassword(password));
-                    }
-                    ps.setString(index, id);
-                    ps.executeUpdate();
-                    writeAuditLog("Updated user: " + id);
-                }
-            }
-            loadUsers();
-            handleClearForm(null);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+    boolean exists = false;
+    if (id != null && !id.isBlank()) {
+        try (PreparedStatement check = conn.prepareStatement("SELECT 1 FROM users WHERE user_id = ?")) {
+            check.setString(1, id);
+            ResultSet rs = check.executeQuery();
+            exists = rs.next(); // true if found
         }
+    }
+
+    if (!exists) {
+        // INSERT
+        String newID = (id == null || id.isBlank()) ? "user" + System.currentTimeMillis() : id;
+        String sql = "INSERT INTO users (user_id, name, role, password_hash) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, newID);
+            ps.setString(2, name);
+            ps.setString(3, role);
+            ps.setString(4, hashPassword(password));
+            ps.executeUpdate();
+            writeAuditLog("Added new user: " + newID);
+        }
+    } else {
+        // UPDATE
+        String sql = "UPDATE users SET name = ?, role = ?"
+                + (password != null && !password.isBlank() ? ", password_hash = ?" : "")
+                + " WHERE user_id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ps.setString(2, role);
+            int index = 3;
+            if (password != null && !password.isBlank()) {
+                ps.setString(index++, hashPassword(password));
+            }
+            ps.setString(index, id);
+            ps.executeUpdate();
+            writeAuditLog("Updated user: " + id);
+        }
+    }
+
+    loadUsers();
+    handleClearForm(null);
+
+} catch (SQLException e) {
+    e.printStackTrace();
+}
+
     }
 
     @FXML

@@ -54,16 +54,6 @@
             
             <Label text="Contact Number:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
             <TextField fx:id="reporterContactField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-            
-            <Label text="Link to Existing Case (Optional):" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="11">
-                <GridPane.margin>
-                    <Insets top="15.0" />
-                </GridPane.margin>
-            </Label>
-            
-            <Label text="Case ID:" GridPane.columnIndex="0" GridPane.rowIndex="12" />
-            <TextField fx:id="linkedCaseIDField" promptText="Enter Case ID or leave blank for new case" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-            
         </GridPane>
         
         <Button text="Register and Validate Report" onAction="#handleReportSubmission" style="-fx-font-size: 16px; -fx-padding: 10 20; -fx-background-color: #28a745; -fx-text-fill: white;" />

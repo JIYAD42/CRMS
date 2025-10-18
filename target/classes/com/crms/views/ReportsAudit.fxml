@@ -25,32 +25,6 @@
     </HBox>
 
     <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-        
-        <Tab text="Summary Reports">
-            <VBox spacing="20.0" style="-fx-padding: 25;">
-                
-                <Label text="Report Generation Parameters" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
-                
-                <HBox spacing="15.0" alignment="CENTER_LEFT">
-                    <Label text="Report Type:"/>
-                    <ComboBox fx:id="reportTypeComboBox" promptText="Select Report (e.g., Cases by Type, Closed Cases)" prefWidth="250.0"/>
-                    
-                    <Label text="Date Range:"/>
-                    <DatePicker fx:id="dateFromPicker" promptText="From" />
-                    <Label text="to"/>
-                    <DatePicker fx:id="dateToPicker" promptText="To" />
-                    
-                    <Button text="Generate Report" onAction="#handleGenerateReport" style="-fx-background-color: #007bff; -fx-text-fill: white;"/>
-                </HBox>
-                
-                <Label fx:id="reportTitleLabel" text="Generated Report Results" style="-fx-font-weight: bold;"/>
-                <TableView fx:id="reportResultsTable" VBox.vgrow="ALWAYS" prefHeight="400.0">
-                    </TableView>
-                
-                <Button text="Export Report" onAction="#handleExportReport" alignment="BOTTOM_RIGHT"/>
-            </VBox>
-        </Tab>
-
         <Tab text="Audit Logs">
             <VBox spacing="10.0" style="-fx-padding: 25;">
                 <Label text="System Activity and User Actions" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>

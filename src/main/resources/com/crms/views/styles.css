@@ -1,0 +1,90 @@
+/* ===================================================================
+   General Application Color Palette
+   Primary Blue: #007bff (Strong Action Color)
+   Secondary/Accent: #6c757d (Muted/Neutral)
+   Background Light: #f7f9fb
+   Text Dark: #334e68
+   =================================================================== */
+
+/* --- ROOT/Background --- */
+.root {
+    /* Defined inline in FXML: -fx-background-color: #f7f9fb; */
+}
+
+/* --- Login Card Container (.login-card VBox) --- */
+.login-card {
+    -fx-background-color: #ffffff; /* White card background */
+    -fx-background-radius: 12; /* Soft rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 25, 0.4, 0, 8); /* Subtle, deep shadow */
+    -fx-max-width: 350px; /* Ensure the card doesn't get too wide */
+    -fx-padding: 40px; /* Consistent padding inside the card */
+}
+
+/* --- Header & Title Styles --- */
+.header-text {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 32px;
+    -fx-font-weight: 800; /* Extra bold */
+    -fx-text-fill: #334e68; /* Dark professional color */
+    -fx-padding: 0 0 5px 0;
+}
+
+.sub-header-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #99aab5; /* Muted gray for secondary text */
+    -fx-padding: 0 0 15px 0;
+}
+
+/* --- Input Labels (e.g., "Username", "Password") --- */
+.input-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600; /* Semi-bold */
+    -fx-text-fill: #4c6883; /* Slightly lighter than the header text */
+}
+
+/* --- Text Fields and Password Fields --- */
+.modern-text-field {
+    -fx-background-color: #ffffff, #ffffff; /* White background */
+    -fx-background-radius: 6;
+    -fx-border-color: #d8e1e8; /* Light gray border */
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+    -fx-padding: 10 12; /* Generous padding */
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #b3c0cf; /* Muted prompt text */
+    -fx-effect: null; /* Remove default JavaFX field shadow */
+}
+
+.modern-text-field:focused {
+    -fx-border-color: #007bff; /* Primary color border when focused */
+    -fx-border-width: 1.5;
+}
+
+/* --- Primary Action Button (Login Button) --- */
+.primary-button {
+    -fx-background-color: #007bff; /* Primary blue */
+    -fx-text-fill: white;
+    -fx-background-radius: 8; /* Soft rounded corners */
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-padding: 12 25; /* Good vertical and horizontal padding */
+    -fx-cursor: hand; /* Changes cursor to indicate interactivity */
+}
+
+.primary-button:hover {
+    -fx-background-color: #0056b3; /* Darker blue on hover */
+}
+
+.primary-button:pressed {
+    -fx-background-color: #004085; /* Even darker on press */
+}
+
+/* --- Error Message Label --- */
+.error-label {
+    -fx-text-fill: #dc3545; /* Standard red for errors */
+    -fx-font-weight: 500;
+    -fx-font-size: 13px;
+    -fx-max-width: 250px;
+    -fx-alignment: center; /* Center error message */
+    -fx-padding: 10 0 0 0;
+}

@@ -19,7 +19,7 @@ public class InitDatabase {
                     "user_id TEXT PRIMARY KEY," +
                     "name TEXT NOT NULL," +
                     "role TEXT NOT NULL," +  // 'ADMIN' or 'OFFICER'
-                    "password_hash TEXT NOT NULL," +
+                    "password_hash VARCHAR(64) NOT NULL," +
                     "is_active INTEGER DEFAULT 1," +
                     "created_at DATETIME DEFAULT CURRENT_TIMESTAMP" +
                     ");";
@@ -27,8 +27,8 @@ public class InitDatabase {
 
             // Sample users
             stmt.execute("INSERT OR IGNORE INTO users (user_id, name, role, password_hash) VALUES " +
-                    "('admin01', 'Administrator', 'ADMIN', 'admin123hashed')," +
-                    "('officer01', 'Officer One', 'OFFICER', 'officer123hashed');");
+                    "('admin', 'Administrator', 'ADMIN', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918')," +
+                    "('officer', 'Officer One', 'OFFICER', 'd71f0bd623e5e0b40eb4b4355091d057d5e40644e1e6cda16b33213f8ae7541f');");
 
             // -------------------
             // Cases table
@@ -58,6 +58,7 @@ public class InitDatabase {
                     "case_id INTEGER," +
                     "assigned_officer_id TEXT," +
                     "crime_type TEXT NOT NULL," +
+                    "status TEXT," +
                     "incident_date TEXT NOT NULL," +
                     "incident_time TEXT," +
                     "location TEXT," +

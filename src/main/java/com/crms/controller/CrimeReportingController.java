@@ -33,7 +33,6 @@ public class CrimeReportingController implements Initializable {
     @FXML private TextArea descriptionArea;
     @FXML private TextField reporterNameField;
     @FXML private TextField reporterContactField;
-    @FXML private TextField linkedCaseIDField;
     @FXML private Label statusMessage;
 
     private Officer currentOfficer;
@@ -78,7 +77,7 @@ public class CrimeReportingController implements Initializable {
         String description = trimToNull(descriptionArea.getText());
         String reporterName = trimToNull(reporterNameField.getText());
         String reporterContact = trimToNull(reporterContactField.getText());
-        String linkedCaseText = trimToNull(linkedCaseIDField.getText());
+
 
         if (crimeType == null || crimeType.isBlank()) {
             setStatus("Please select a crime type.", true); return;
@@ -99,29 +98,15 @@ public class CrimeReportingController implements Initializable {
                 setStatus("Invalid time format. Use HH:mm (24-hour).", true); return;
             }
         }
-
-        Integer linkedCaseId = null;
-        if (linkedCaseText != null && !linkedCaseText.isBlank()) {
-            try {
-                linkedCaseId = Integer.parseInt(linkedCaseText.trim());
-                if (!caseExists(linkedCaseId)) {
-                    setStatus("Linked case ID not found: " + linkedCaseId, true); return;
-                }
-            } catch (NumberFormatException nfe) {
-                setStatus("Linked Case ID must be an integer.", true); return;
-            }
-        }
-
         try {
             int reportId = insertCrimeReport(
-                    linkedCaseId, crimeType, Date.valueOf(incidentDate),
+                    null, crimeType, Date.valueOf(incidentDate),
                     incidentTimeSql, location, description,
                     reporterName, reporterContact
             );
             if (reportId <= 0) { setStatus("Failed to save report.", true); return; }
 
             CrimeCase linkedCase = null;
-            if (linkedCaseId != null) linkedCase = fetchCrimeCase(linkedCaseId);
 
             String reporterInfo = buildReporterInfoString(reporterName, reporterContact);
             CrimeReport modelReport = new CrimeReport(reportId, reporterInfo, linkedCase);
@@ -174,8 +159,8 @@ public class CrimeReportingController implements Initializable {
                               String reporterName, String reporterContact) throws SQLException {
 
     final String sql = "INSERT INTO crime_reports " +
-            "(case_id, assigned_officer_id, crime_type, incident_date, incident_time, location, description, reporter_name, reporter_contact) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "(case_id, assigned_officer_id, crime_type, incident_date, status, incident_time, location, description, reporter_name, reporter_contact) " +
+            "VALUES (?, ?, ?, ?, 'SUBMITTED',?, ?, ?, ?, ?)";
 
     try (Connection conn = DatabaseHelper.getConnection();
          PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -249,6 +234,5 @@ public class CrimeReportingController implements Initializable {
         descriptionArea.clear();
         reporterNameField.clear();
         reporterContactField.clear();
-        linkedCaseIDField.clear();
     }
 }

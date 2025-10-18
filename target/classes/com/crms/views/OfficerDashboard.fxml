@@ -4,8 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
 
@@ -26,7 +25,11 @@
 
     <center>
         <VBox spacing="20.0" style="-fx-padding: 25;">
-            <Label text="Officer Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Label text="Officer Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Pane HBox.hgrow="ALWAYS" /> <!-- Fills space to push button to the right -->
+                <Button text="Logout" onAction="#handlelogout" style="-fx-padding: 5 15;" />
+            </HBox>
 
             <HBox spacing="20.0" alignment="CENTER_LEFT">
                 <VBox style="-fx-border-color: #007bff; -fx-border-radius: 5; -fx-padding: 10;" prefWidth="200.0">

@@ -48,10 +48,6 @@
 
                         <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                         <ComboBox fx:id="statusComboBox" promptText="Select Status" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-                        <Label text="Assigned Officer:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                        <ComboBox fx:id="officerComboBox" promptText="Assign Officer" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
                         <Label text="Report Details:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                         <TextArea fx:id="reportDetailsArea" promptText="Summary of linked crime reports..." 
                                   prefRowCount="4" wrapText="true" prefWidth="400.0" 

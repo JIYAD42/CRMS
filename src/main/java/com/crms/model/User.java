@@ -21,6 +21,6 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s (ID: %d)", role, name, userID);
+        return String.format("[%s] %s (ID: %s)", role, name, userID);
     }
 }
